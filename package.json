@@ -19,6 +19,9 @@
     "url": "https://github.com/DavidMilai/chat-backend/issues"
   },
   "homepage": "https://github.com/DavidMilai/chat-backend#readme",
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
