@@ -42,7 +42,7 @@ app.get("/user", (req, res) => {
 //   console.log("Listening...");
 // });
 
-server.listen(port, "0.0.0.0", () => {
+server.listen(port, () => {
   console.log("server started");
 });
 
