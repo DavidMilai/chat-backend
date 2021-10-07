@@ -2,7 +2,17 @@ const express = require("express");
 var http = require("http");
 const cors = require("cors");
 const app = express();
+const mongoose = require("mongoose");
+
 const port = process.env.PORT || 5000;
+
+const dburl =
+  "mongodb+srv://admin:admin-17@cluster0.syilg.mongodb.net/chat_app?retryWrites=true&w=majority";
+mongoose
+  .connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => console.log("Connected to DB"))
+  .catch((error) => console.log(error));
+
 var server = http.createServer(app);
 var io = require("socket.io")(server);
 app.use(express.json());
@@ -21,13 +31,14 @@ io.on("connection", (socket) => {
   socket.on("message", (msg) => {
     console.log(msg);
     let targetId = msg.sourceId;
-    if (clients[targetId]) clients[targetId].emit("message", msg); });
+    if (clients[targetId]) clients[targetId].emit("message", msg);
+  });
 });
 
 app.route("/check").get((req, res) => {
   return res.json("app is woking fine");
-});
+})
 
-server.listen(port, "0.0.0.0", () => {
-  console.log("server started");
-});
+app.route("/test").get((req, res) => {
+  return res.json("app is woking fine");
+})
