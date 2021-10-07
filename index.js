@@ -1,6 +1,5 @@
 const express = require("express");
 var http = require("http");
-const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 const port = process.env.PORT || 5000;
@@ -23,7 +22,7 @@ app.route("/check").get((req, res) => {
 });
 
 app.get("/user", (req, res) => {
-  console.log("Connected to DB")
+  
   const user = new User({
     password: "123456",
     clientCode: "demo",
