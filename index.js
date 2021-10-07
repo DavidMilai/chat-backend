@@ -21,6 +21,25 @@ app.route("/check").get((req, res) => {
   return res.json("app is woking fine");
 });
 
+app.get("/allUsers",(req, res) => {
+  User.find().then((result)=>{
+    res.send(result);
+  }).catch((err)=>{
+    console.log(err);
+  })
+});
+
+
+app.get("/singleUser",(req, res) => {
+  User.findById("615eb06edc3f63b3c5155a90").then((result)=>{
+    res.send(result);
+  }).catch((err)=>{
+    console.log(err);
+  })
+});
+
+
+
 app.get("/user", (req, res) => {
   
   const user = new User({
@@ -42,7 +61,7 @@ app.get("/user", (req, res) => {
 //   console.log("Listening...");
 // });
 
-server.listen(port, () => {
+server.listen(port, "0.0.0.0", () => {
   console.log("server started");
 });
 
