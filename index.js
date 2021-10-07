@@ -3,6 +3,7 @@ var http = require("http");
 const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
+const User = require("./models/user");
 
 const port = process.env.PORT || 5000;
 
@@ -37,8 +38,17 @@ io.on("connection", (socket) => {
 
 app.route("/check").get((req, res) => {
   return res.json("app is woking fine");
-})
+});
 
-app.route("/test").get((req, res) => {
-  return res.json("app is woking fine");
-})
+app.get("/user", (req, res) => {
+  const user = new User({
+    password: "123456",
+    clientCode: "demo",
+    userID: "001",
+  });
+  user.save().then((result)=>{
+    res.send(result);
+  }).catch((err)=>{
+    console.log(err);
+  });
+});
