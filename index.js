@@ -46,6 +46,7 @@ app.get("/user", (req, res) => {
     password: "123456",
     clientCode: "demo",
     userID: "001",
+    email: "david@gmail.com"
   });
   user
     .save()
