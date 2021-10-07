@@ -8,7 +8,7 @@ const User = require("./models/user");
 const port = process.env.PORT || 5000;
 
 const dburl =
-  "mongodb+srv://admin:admin-17@cluster0.syilg.mongodb.net/chat_app?retryWrites=true&w=majority";
+  "mongodb+srv://admin:admin-17@cluster0.syilg.mongodb.net/chat_app?retryWrites=true&w=majority&ssl=true";
 mongoose
   .connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => console.log("Connected to DB"))
