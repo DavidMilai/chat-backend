@@ -21,7 +21,7 @@ app.route("/check").get((req, res) => {
   return res.json("app is woking fine");
 });
 
-app.get("/allUsers",(req, res) => {
+app.get("/users",(req, res) => {
   User.find().then((result)=>{
     res.send(result);
   }).catch((err)=>{
@@ -30,7 +30,7 @@ app.get("/allUsers",(req, res) => {
 });
 
 
-app.get("/singleUser",(req, res) => {
+app.get("/single-user",(req, res) => {
   User.findById("615eb06edc3f63b3c5155a90").then((result)=>{
     res.send(result);
   }).catch((err)=>{
