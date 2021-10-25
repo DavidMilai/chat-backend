@@ -8,6 +8,9 @@ var server = http.createServer(app);
 var io = require("socket.io")(server);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+const routes = require("./routes");
+app.use("/routes", routes);
+
 
 const dburl =
   "mongodb+srv://admin:admin-17@cluster0.syilg.mongodb.net/chat_app?retryWrites=true&w=majority&ssl=true";
@@ -60,8 +63,21 @@ app.get("/user", (req, res) => {
 });
 
 app.post("/login", (req, res)=>{
-  console.log(  req.body
-    );
+  console.log(req.body);
+  const user = new User({
+    password: req.body.password,
+    clientCode: req.body.clientCode,
+    userID: "001",
+    email:req.body.email
+  });
+  user
+  .save()
+  .then((result) => {
+    res.send(result);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 })
 
 // app.listen(port, () => {
