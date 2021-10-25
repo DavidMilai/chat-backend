@@ -7,6 +7,7 @@ const User = require("./models/user");
 var server = http.createServer(app);
 var io = require("socket.io")(server);
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 const dburl =
   "mongodb+srv://admin:admin-17@cluster0.syilg.mongodb.net/chat_app?retryWrites=true&w=majority&ssl=true";
@@ -41,7 +42,7 @@ app.get("/single-user",(req, res) => {
 
 
 app.get("/user", (req, res) => {
-  
+
   const user = new User({
     password: "123456",
     clientCode: "demo",
@@ -57,6 +58,11 @@ app.get("/user", (req, res) => {
       console.log(err);
     });
 });
+
+app.post("/login", (req, res)=>{
+  console.log(  req.body
+    );
+})
 
 // app.listen(port, () => {
 //   console.log("Listening...");
