@@ -29,4 +29,40 @@ const register = (req, res, next) => {
       });
   });
 };
-module.exports = { register };
+
+const login = (req, res, next) => {
+  var email = req.body.email;
+  var password = req.body.password;
+  Auth.findOne({ $or: [{ email: email }, { password: password }] }).then(
+    (auth) => {
+      if (auth) {
+        bcrypt.compare(password, auth.password, function (err, result) {
+          if (err) {
+            res.json({
+              error: err,
+            });
+          }
+          if (result) {
+            let token = jwt.sign({ name: auth.email }, "sercertvalue", {
+              expiresIn: "1h",
+            });
+            res.json({
+              message: "Login successful",
+              token,
+            });
+          } else {
+            res.json({
+              message: "Invalid email or password",
+            });
+          }
+        });
+      } else {
+        res.json({
+          message: "Invalid username or password",
+        });
+      }
+    }
+  );
+};
+
+module.exports = { register, login };
