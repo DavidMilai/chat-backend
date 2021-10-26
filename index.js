@@ -7,7 +7,7 @@ const User = require("./models/user");
 var server = http.createServer(app);
 var io = require("socket.io")(server);
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 const routes = require("./routes");
 const UserRoute = require("./routes/user");
 app.use("/routes", routes);
@@ -25,65 +25,6 @@ var clients = {};
 app.route("/check").get((req, res) => {
   return res.json("app is woking fine");
 });
-
-app.get("/users",(req, res) => {
-  User.find().then((result)=>{
-    res.send(result);
-  }).catch((err)=>{
-    console.log(err);
-  })
-});
-
-
-app.get("/single-user",(req, res) => {
-  User.findById("615eb06edc3f63b3c5155a90").then((result)=>{
-    res.send(result);
-  }).catch((err)=>{
-    console.log(err);
-  })
-});
-
-
-
-app.get("/user", (req, res) => {
-
-  const user = new User({
-    password: "123456",
-    clientCode: "demo",
-    userID: "001",
-    email: "david@gmail.com"
-  });
-  user
-    .save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-app.post("/login", (req, res)=>{
-  console.log(req.body);
-  const user = new User({
-    password: req.body.password,
-    clientCode: req.body.clientCode,
-    userID: "001",
-    email:req.body.email
-  });
-  user
-  .save()
-  .then((result) => {
-    res.send(result);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-})
-
-// app.listen(port, () => {
-//   console.log("Listening...");
-// });
 
 server.listen(port, "0.0.0.0", () => {
   console.log("server started");

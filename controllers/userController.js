@@ -39,6 +39,7 @@ const store = (req, res, next) => {
   user
     .save()
     .then((result) => {
+      console.log(result);
       res.json({
         message: "Employee added succesfully",
       });
@@ -50,4 +51,4 @@ const store = (req, res, next) => {
     });
 };
 
-module.exports = {index, show,store}
+module.exports = { index, show, store };
