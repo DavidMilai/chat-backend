@@ -9,8 +9,9 @@ var io = require("socket.io")(server);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 const routes = require("./routes");
+const UserRoute = require("./routes/user");
 app.use("/routes", routes);
-
+app.use("/api", UserRoute);
 
 const dburl =
   "mongodb+srv://admin:admin-17@cluster0.syilg.mongodb.net/chat_app?retryWrites=true&w=majority&ssl=true";
