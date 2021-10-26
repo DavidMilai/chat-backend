@@ -6,4 +6,4 @@ router.get("/users", UserController.index);
 router.post("/register", UserController.store);
 router.post("/getByID", UserController.show);
 
-module.exports = router
+module.exports = router;
