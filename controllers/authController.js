@@ -44,7 +44,7 @@ const login = (req, res, next) => {
           }
           if (result) {
             let token = jwt.sign({ name: auth.email }, "sercertvalue", {
-              expiresIn: "1h",
+              expiresIn: "30d",
             });
             res.json({
               message: "Login successful",
