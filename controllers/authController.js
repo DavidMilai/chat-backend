@@ -46,9 +46,15 @@ const login = (req, res, next) => {
             let token = jwt.sign({ name: auth.email }, "sercertvalue", {
               expiresIn: "30d",
             });
+
+            let refreshToken = jwt.sign({ name: auth.email }, "refreshToken", {
+              expiresIn: "30d",
+            });
+
             res.json({
               message: "Login successful",
               token,
+              refreshToken,
             });
           } else {
             res.json({
@@ -65,4 +71,25 @@ const login = (req, res, next) => {
   );
 };
 
-module.exports = { register, login };
+const refreshToken = (res, req, next) => {
+  const refreshToket = req.body.refreshToken;
+  jwt.verify(refreshToken, "refreshToken", function (err, decode) {
+    if (err) {
+      res.status(400).json({
+        err,
+      });
+    }
+    else{
+      let token = jwt.sign({name: decode.name},"sercertvalue",{expiresIn:"60d"})
+      const refreshToket = req.body.refreshToken;
+      res.status(200).json({
+        message: "Token refreshed",
+        token,
+        refreshToken
+      })
+
+    }
+  });
+};
+
+module.exports = { register, login, refreshToken };
