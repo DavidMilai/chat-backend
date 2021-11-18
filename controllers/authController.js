@@ -55,6 +55,7 @@ const login = (req, res, next) => {
               message: "Login successful",
               token,
               refreshToken,
+              result: auth
             });
           } else {
             res.json({
