@@ -20,7 +20,7 @@ const MessageRoute = require("./routes/message");
 app.use("/routes", routes);
 app.use("/api", UserRoute);
 app.use("/auth", AuthRoute);
-app.use("/auth", MessageRoute);
+app.use("/messages", MessageRoute);
 
 
 const dburl =
