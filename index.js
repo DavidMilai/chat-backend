@@ -13,11 +13,15 @@ app.use(express.urlencoded({ extended: true }));
 const routes = require("./routes");
 const UserRoute = require("./routes/user");
 const AuthRoute = require("./routes/auth");
+const MessageRoute = require("./routes/message");
+
 
 
 app.use("/routes", routes);
 app.use("/api", UserRoute);
 app.use("/auth", AuthRoute);
+app.use("/auth", MessageRoute);
+
 
 const dburl =
   "mongodb+srv://admin:admin-17@cluster0.syilg.mongodb.net/chat_app?retryWrites=true&w=majority&ssl=true";
