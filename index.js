@@ -32,10 +32,6 @@ mongoose
 
 var clients = {};
 
-app.route("/check").get((req, res) => {
-  return res.json("app is woking fine");
-});
-
 server.listen(port, "0.0.0.0", () => {
   console.log("server started");
 });
@@ -49,9 +45,9 @@ io.on("connection", (socket) => {
     console.log(clients);
   });
 
-  socket.on("message", (msg) => {
+  socket.in("message", (msg) => {
     console.log(msg);
     let targetId = msg.targetId;
-    if (clients[targetId]) clients[msg.sourceId].emit("message", msg);
+     if (clients[targetId]) clients[msg.sourceId].emit("message", msg);
   });
 });
