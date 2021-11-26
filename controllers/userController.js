@@ -1,7 +1,10 @@
 const User = require("../models/user");
+const Auth = require("../models/auth");
+
 
 const index = (req, res, next) => {
-  User.find()
+  
+  Auth.find()
     .then((response) => {
       res.json({
         response,
